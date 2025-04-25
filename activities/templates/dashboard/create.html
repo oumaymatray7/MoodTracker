@@ -1,11 +1,12 @@
-{% extends 'dashboard/base_dashboard.html' %}
-{% block content %}
-<h2>Ajouter une activité</h2>
-
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-success">Enregistrer</button>
-  <a href="{% url 'mes_activites' %}" class="btn btn-secondary">Annuler</a>
-</form>
-{% endblock %}
+@login_required
+def create_activite(request):
+    if request.method == 'POST':
+        form = ActiviteForm(request.POST)
+        if form.is_valid():
+            activite = form.save(commit=False)
+            activite.utilisateur = request.user
+            activite.save()
+            return redirect('mes_activites')
+    else:
+        form = ActiviteForm()
+    return render(request, 'dashboard/create.html', {'form': form})

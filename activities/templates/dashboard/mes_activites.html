@@ -1,0 +1,47 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Tableau de bord - Mes Activités</h2>
+    <a href="{% url 'ajouter_activite' %}" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Ajouter une activité
+    </a>
+  </div>
+
+  <!-- Liste des Activités -->
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h3 class="card-title mb-0">Vos dernières activités</h3>
+    </div>
+    <div class="card-body">
+      {% if activites %}
+      <ul class="list-group list-group-flush">
+        {% for activite in activites %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="mb-1">{{ activite.mood }}</h6>
+              <small class="text-muted">
+                {{ activite.date|date:"d M Y" }} à {{ activite.date|time:"H:i" }}
+              </small>
+              {% if activite.comment %}
+              <p class="text-muted mt-1 mb-0">{{ activite.comment }}</p>
+              {% endif %}
+            </div>
+            <span class="badge bg-success">{{ activite.activity }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="text-center py-5">
+        <p class="text-muted mb-3">Aucune activité pour le moment.</p>
+        <a href="{% url 'ajouter_activite' %}" class="btn btn-outline-primary">Ajouter votre première activité</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

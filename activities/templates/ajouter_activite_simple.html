@@ -1,0 +1,40 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter une activité</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+          <div class="card-header bg-primary text-white text-center">
+            <h4><i class="bi bi-plus-circle me-2"></i>Ajouter une activité</h4>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <div class="text-end mt-3">
+                <button type="submit" class="btn btn-success">
+                  <i class="bi bi-check-circle"></i> Enregistrer
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a href="{% url 'mes_activites' %}" class="btn btn-link">
+            ⬅ Retour au tableau de bord
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
