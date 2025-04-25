@@ -13,6 +13,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'activities',  # ← Nom de ton app
+     'crispy_forms',
+     'crispy_bootstrap4',
 ]
 
 # Configuration des templates
@@ -77,3 +79,9 @@ USE_TZ = True
 # Fichiers médias (si besoin plus tard)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'mes_activites'
+LOGOUT_REDIRECT_URL = 'login'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"

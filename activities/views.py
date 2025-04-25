@@ -1,7 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -17,7 +19,8 @@ def dashboard(request):
 
 @login_required
 def liste_activites(request):
-    return render(request, 'dashboard/liste.html')
+    activites = ActiviteBienEtre.objects.filter(utilisateur=request.user)
+    return render(request, 'dashboard/liste.html', {'activites': activites})
 
 
 
@@ -35,3 +38,21 @@ def send_feedback(request):
         return HttpResponseRedirect(reverse('accueil_public'))
 
     return HttpResponseRedirect(reverse('accueil_public'))
+def register(request):
+   
+    # (optionnel) tu peux afficher un message si déjà connecté
+    if request.user.is_authenticated:
+        messages.info(request, "Vous êtes déjà connecté.")
+
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # connexion automatique après inscription
+            messages.success(request, "Votre compte a été créé avec succès.")
+            return redirect('mes_activites')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'public/register.html', {'form': form})

@@ -59,8 +59,8 @@
             <li><a href="#hero" class="active">Home<br></a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#departments">Departments</a></li>
-            <li><a href="#doctors">Doctors</a></li>
+         
+        
             <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                 <li><a href="#">Dropdown 1</a></li>
@@ -82,6 +82,9 @@
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
+        <a href="{% url 'login' %}" class="btn btn-outline-primary">Se connecter</a>
+
+    
 
         <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
 
@@ -153,60 +156,27 @@ MoodTracker vous aide à prendre conscience de vos émotions, à développer de 
 
     </section><!-- /Hero Section -->
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+   <!-- About Section -->
+<section id="about" class="about section">
 
-      <div class="container">
+  <div class="container">
+    <div class="row gy-4 gx-5">
 
-        <div class="row gy-4 gx-5">
-
-          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
-          </div>
-
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <h3>About Us</h3>
-            <p>
-              Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.
-            </p>
-            <ul>
-              <li>
-                <i class="fa-solid fa-vial-circle-check"></i>
-                <div>
-                  <h5>Ullamco laboris nisi ut aliquip consequat</h5>
-                  <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
-                </div>
-              </li>
-              <li>
-                <i class="fa-solid fa-pump-medical"></i>
-                <div>
-                  <h5>Magnam soluta odio exercitationem reprehenderi</h5>
-                  <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
-                </div>
-              </li>
-              <li>
-                <i class="fa-solid fa-heart-circle-xmark"></i>
-                <div>
-                  <h5>Voluptatem et qui exercitationem</h5>
-                  <p>Et velit et eos maiores est tempora et quos dolorem autem tempora incidunt maxime veniam</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-      </div>
+      <!-- Image et vidéo -->
       <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-        <img src="{% static 'medilab/assets/img/about.jpg' %}" class="img-fluid" alt="">
+        <img src="{% static 'medilab/assets/img/about.jpg' %}" class="img-fluid" alt="À propos de MoodTracker">
+        <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
       </div>
-      
+
+      <!-- Contenu -->
       <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
         <h3>Pourquoi MoodTracker ?</h3>
         <p>
-          MoodTracker est une application pensée pour vous aider à prendre soin de votre bien-être mental. En notant vos humeurs et vos activités chaque jour, vous gagnez en conscience émotionnelle et développez des habitudes plus saines.
+          MoodTracker est une application pensée pour vous aider à prendre soin de votre bien-être mental. 
+          En notant vos humeurs et vos activités chaque jour, vous gagnez en conscience émotionnelle 
+          et développez des habitudes plus saines.
         </p>
+
         <ul>
           <li>
             <i class="fa-solid fa-face-smile-beam"></i>
@@ -219,21 +189,24 @@ MoodTracker vous aide à prendre conscience de vos émotions, à développer de 
             <i class="fa-solid fa-chart-line"></i>
             <div>
               <h5>Statistiques et visualisations</h5>
-              <p>Découvrez quels événements, personnes ou activités influencent positivement ou négativement vos émotions.</p>
+              <p>Découvrez les activités, les environnements et les moments qui influencent votre humeur.</p>
             </div>
           </li>
           <li>
             <i class="fa-solid fa-user-lock"></i>
             <div>
               <h5>Confidentialité garantie</h5>
-              <p>Vos données sont personnelles et sécurisées. MoodTracker respecte votre vie privée.</p>
+              <p>Vos données sont strictement personnelles et protégées. MoodTracker respecte votre vie privée.</p>
             </div>
           </li>
         </ul>
       </div>
-      
 
-    </section><!-- /About Section -->
+    </div>
+  </div>
+
+</section><!-- /About Section -->
+
 
     <!-- Stats Section -->
 <section id="stats" class="stats section light-background">
