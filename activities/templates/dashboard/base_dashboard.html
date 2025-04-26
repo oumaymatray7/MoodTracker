@@ -46,6 +46,31 @@
       integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0="
       crossorigin="anonymous"
     />
+    <style>
+      /* Thème Clair */
+      .light-mode {
+        background-color: #ffffff;
+        color: #212529;
+      }
+      
+      /* Thème Sombre */
+      .dark-mode {
+        background-color: #343a40;
+        color: #f8f9fa;
+      }
+      
+      /* Thème Bleu Doux */
+      .blue-soft-mode {
+        background-color: #e7f1ff;
+        color: #0d6efd;
+      }
+      
+      /* Animation douce */
+      .container, .card, .card-body {
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+      </style>
+      
   </head>
   
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -121,151 +146,7 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon bi bi-box-seam-fill"></i>
-                <p>
-                  Widgets
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Boîte Info</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Graphiques</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon bi bi-clipboard-fill"></i>
-                <p>
-                  Mise en page
-                  <span class="nav-badge badge text-bg-secondary me-3">6</span>
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Barre latérale par défaut</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Barre latérale fixe</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Zone personnalisée</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Barre réduite</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Barre réduite + Masquée</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Switch de Logo</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Mode RTL (arabe)</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon bi bi-tree-fill"></i>
-                <p>
-                  Éléments UI
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Général</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Icônes</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Ligne de temps</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon bi bi-pencil-square"></i>
-                <p>
-                  Formulaires
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{% url 'ajouter_activite' %}" class="btn btn-outline-primary">
-                    <i class="bi bi-plus-circle"></i> Ajouter une activité
-                  </a>
-                  
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon bi bi-table"></i>
-                <p>
-                  Tableaux
-                  <i class="nav-arrow bi bi-chevron-right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{% url 'mes_activites' %}" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Tableau des activités</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            
 
             <li class="nav-header">EXEMPLES</li>
             <li class="nav-item">

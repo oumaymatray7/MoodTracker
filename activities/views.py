@@ -80,14 +80,13 @@ def edit_activite(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Activité modifiée avec succès.')
-            return redirect('liste_activites')
+            return redirect('mes_activites')  # <<< corrigé ici
     else:
         form = ActiviteForm(instance=activite)
     
     return render(request, 'dashboard/edit_activite.html', {'form': form})
 
 
-# Supprimer une activité
 @login_required
 def delete_activite(request, id):
     activite = get_object_or_404(ActiviteBienEtre, id=id, utilisateur=request.user)
@@ -95,9 +94,9 @@ def delete_activite(request, id):
     if request.method == 'POST':
         activite.delete()
         messages.success(request, 'Activité supprimée avec succès.')
-        return redirect('liste_activites')
-    
+        return redirect('mes_activites')  # <<<< bien corrigé ici
     return render(request, 'dashboard/delete_activite.html', {'activite': activite})
+
 
 @login_required
 def create_activite(request):

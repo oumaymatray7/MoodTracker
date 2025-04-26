@@ -1,8 +1,69 @@
 {% extends 'dashboard/base_dashboard.html' %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>Thèmes de MoodTracker</h2>
-  <p>Personnalisez l'apparence de votre tableau de bord selon vos préférences.</p>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h3 class="card-title mb-0">🎨 Personnalisation du Thème</h3>
+    </div>
+    <div class="card-body">
+      <p class="text-muted">
+        Choisissez votre style préféré pour personnaliser l'apparence de votre tableau de bord MoodTracker.
+      </p>
+
+      <div class="row mt-4">
+        <!-- Exemple de choix de thèmes -->
+        <div class="col-md-4 mb-3">
+          <div class="card text-center p-3">
+            <h5 class="card-title">Clair</h5>
+            <button class="btn btn-primary mt-2" id="theme-light">Appliquer</button>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <div class="card text-center p-3">
+            <h5 class="card-title">Sombre</h5>
+            <button class="btn btn-dark mt-2" id="theme-dark">Appliquer</button>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <div class="card text-center p-3">
+            <h5 class="card-title">Bleu Doux</h5>
+            <button class="btn btn-info mt-2" id="theme-blue-soft">Appliquer</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+
+<!-- Script pour changer dynamiquement le thème -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const body = document.body;
+
+  function setLightTheme() {
+    body.classList.remove('dark-mode', 'blue-soft-mode');
+    body.classList.add('light-mode');
+  }
+
+  function setDarkTheme() {
+    body.classList.remove('light-mode', 'blue-soft-mode');
+    body.classList.add('dark-mode');
+  }
+
+  function setBlueSoftTheme() {
+    body.classList.remove('light-mode', 'dark-mode');
+    body.classList.add('blue-soft-mode');
+  }
+
+  // Appliquer selon clic utilisateur
+  document.getElementById('theme-light').addEventListener('click', setLightTheme);
+  document.getElementById('theme-dark').addEventListener('click', setDarkTheme);
+  document.getElementById('theme-blue-soft').addEventListener('click', setBlueSoftTheme);
+});
+</script>
+
 {% endblock %}
