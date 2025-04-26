@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -10,6 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 from activities.models import ActiviteBienEtre
 
 from .forms import ActiviteForm
+from .models import Feedback
+
+
+@csrf_exempt
 
 
 def accueil_public(request):
@@ -70,9 +75,15 @@ def create_activite(request):
     else:
         form = ActiviteForm()
     return render(request, 'dashboard/create.html', {'form': form})
+def contact_page(request):
+    return render(request, 'public/contact.html')
 
 
-@login_required  # facultatif pour ce type de formulaire
+def feedback_list(request):
+    feedbacks = Feedback.objects.all().order_by('-created_at')
+    return render(request, 'dashboard/feedback_list.html', {'feedbacks': feedbacks})
+
+@login_required  # optionnel
 def send_feedback(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -80,12 +91,18 @@ def send_feedback(request):
         msg_type = request.POST.get('type')
         message = request.POST.get('message')
 
-        print("Feedback reçu :", name, email, msg_type, message)
+        # ➡️ Enregistrer dans la base de données
+        Feedback.objects.create(
+            name=name,
+            email=email,
+            msg_type=msg_type,
+            message=message
+        )
 
         messages.success(request, "Merci ! Votre message a été envoyé.")
-        return HttpResponseRedirect(reverse('accueil_public'))
+        return HttpResponseRedirect(reverse('contact'))  # ou accueil_public
+    return HttpResponseRedirect(reverse('contact'))  # Si ce n'est pas un POST, retourner vers la page contact aussi
 
-    return HttpResponseRedirect(reverse('accueil_public'))
 def register(request):
    
     # (optionnel) tu peux afficher un message si déjà connecté

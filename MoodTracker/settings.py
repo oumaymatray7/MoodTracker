@@ -86,3 +86,10 @@ LOGOUT_REDIRECT_URL = 'login'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Configuration SMTP pour l'envoi d'emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'           # Par exemple pour Gmail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tonemail@tondomaine.com'
+EMAIL_HOST_PASSWORD = 'ton_mot_de_passe_app'  # Utilise un mot de passe d'application si Gmail

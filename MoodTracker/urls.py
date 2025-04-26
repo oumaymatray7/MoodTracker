@@ -5,6 +5,7 @@ from django.urls import include, path
 from activities import views as activities_views
 
 urlpatterns = [
+     
     path('admin/', admin.site.urls),
     path('ajouter-activite/', activities_views.ajouter_activite, name='ajouter_activite'),
     path('', include('activities.urls')),
