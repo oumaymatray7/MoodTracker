@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from activities.models import ActiviteBienEtre
 
 from .forms import ActiviteForm
-from .models import Feedback
+from .models import ActiviteBienEtre, Feedback
 
 
 @csrf_exempt
@@ -53,15 +53,46 @@ def dashboard(request):
 def contact(request):
     return render(request, 'public/contact.html')  # crée ce template dans ton dossier templates/public
 
+from activities.models import ActiviteBienEtre
+
+
 @login_required
 def liste_activites(request):
     activites = ActiviteBienEtre.objects.filter(utilisateur=request.user)
     return render(request, 'dashboard/liste.html', {'activites': activites})
+
 @login_required
 def edit_entry(request, id):
     activite = get_object_or_404(ActiviteBienEtre, id=id, utilisateur=request.user)
     # ...
 
+@login_required
+def edit_activite(request, id):
+    activite = get_object_or_404(ActiviteBienEtre, id=id, utilisateur=request.user)
+    
+    if request.method == 'POST':
+        form = ActiviteForm(request.POST, instance=activite)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Activité modifiée avec succès.')
+            return redirect('liste_activites')
+    else:
+        form = ActiviteForm(instance=activite)
+    
+    return render(request, 'dashboard/edit_activite.html', {'form': form})
+
+
+# Supprimer une activité
+@login_required
+def delete_activite(request, id):
+    activite = get_object_or_404(ActiviteBienEtre, id=id, utilisateur=request.user)
+    
+    if request.method == 'POST':
+        activite.delete()
+        messages.success(request, 'Activité supprimée avec succès.')
+        return redirect('liste_activites')
+    
+    return render(request, 'dashboard/delete_activite.html', {'activite': activite})
 
 @login_required
 def create_activite(request):

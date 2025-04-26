@@ -13,15 +13,15 @@
       </tr>
     </thead>
     <tbody>
-      {% for entry in entries %}
+      {% for activite in activites %}
       <tr>
-        <td>{{ entry.date }}</td>
-        <td>{{ entry.activity }}</td>
-        <td>{{ entry.mood }}</td>
-        <td>{{ entry.comment }}</td>
+        <td>{{ activite.date }}</td>
+        <td>{{ activite.nom }}</td> <!-- ou 'activite.activity' selon ton modèle -->
+        <td>{{ activite.humeur }}</td> <!-- si champ humeur existe -->
+        <td>{{ activite.commentaire }}</td> <!-- ou autre champ -->
         <td>
-          <a href="{% url 'edit_entry' entry.id %}" class="btn btn-sm btn-warning">Modifier</a>
-          <a href="{% url 'delete_entry' entry.id %}" class="btn btn-sm btn-danger">Supprimer</a>
+          <a href="{% url 'edit_entry' activite.id %}" class="btn btn-sm btn-warning">Modifier</a>
+          <a href="{% url 'delete_entry' activite.id %}" class="btn btn-sm btn-danger">Supprimer</a>
         </td>
       </tr>
       {% empty %}

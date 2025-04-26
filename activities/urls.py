@@ -14,6 +14,9 @@ urlpatterns = [
 
  path('feedbacks/', views.feedback_list, name='feedback_list'),
 
+  path('modifier-activite/<int:id>/', activities_views.edit_activite, name='edit_entry'),
+    path('supprimer-activite/<int:id>/', activities_views.delete_activite, name='delete_entry'),
+
     path('', activities_views.accueil_public, name='home'),
     path('mes-activites/', views.liste_activites, name='mes_activites'),
     path('register/', views.register, name='register'),
