@@ -178,86 +178,47 @@
             {% endif %}
             
             
-      
-                    <li class="nav-header">AUTRES MENUS</li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-circle-fill"></i>
-                        <p>Niveau 1</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-circle-fill"></i>
-                        <p>
-                          Niveau 1
-                          <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="nav-icon bi bi-circle"></i>
-                            <p>Niveau 2</p>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="nav-icon bi bi-circle"></i>
-                            <p>
-                              Niveau 2.1
-                              <i class="nav-arrow bi bi-chevron-right"></i>
-                            </p>
-                          </a>
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-record-circle-fill"></i>
-                                <p>Niveau 3</p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-record-circle-fill"></i>
-                                <p>Niveau 3</p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-record-circle-fill"></i>
-                                <p>Niveau 3</p>
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="nav-icon bi bi-circle"></i>
-                            <p>Niveau 2</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-      
-                    <li class="nav-header">ÉTIQUETTES</li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-circle text-danger"></i>
-                        <p class="text">Important</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-circle text-warning"></i>
-                        <p>Avertissement</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-circle text-info"></i>
-                        <p>Information</p>
-                      </a>
-                    </li>
+            <li class="nav-header">ANALYSES & RAPPORTS</li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-clock-history"></i>
+                <p>Historique</p>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-bullseye"></i>
+                <p>Mes Objectifs</p>
+              </a>
+            </li>
+            
+            <li class="nav-item has-treeview" id="rapport-menu">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-graph-up"></i>
+                <p>
+                  Rapports détaillés
+                  <i class="right bi bi-chevron-down"></i>
+                </p>
+              </a>
+            
+              <ul class="nav nav-treeview ms-3" style="display: none;">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon bi bi-calendar-event"></i>
+                    <p>Rapport Mensuel</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon bi bi-calendar-range"></i>
+                    <p>Rapport Annuel</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            
                   </ul>
                   <!--end::Sidebar Menu-->
                 </nav>
@@ -679,19 +640,18 @@
   <!-- /.card-footer -->
 </div>
 <!-- /.card -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const authMenu = document.querySelector('#auth-menu > a');
-    const submenu = document.querySelector('#auth-menu ul');
-  
-    authMenu.addEventListener('click', function(e) {
-      e.preventDefault(); // empêcher que la page saute en haut
-      if (submenu.style.display === 'none') {
-        submenu.style.display = 'block';
-      } else {
-        submenu.style.display = 'none';
-      }
-    });
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const authMenu = document.querySelector('#auth-menu > a');
+  const submenu = document.querySelector('#auth-menu ul');
+
+  authMenu.addEventListener('click', function(e) {
+    e.preventDefault(); // empêcher que la page saute en haut
+    if (submenu.style.display === 'none') {
+      submenu.style.display = 'block';
+    } else {
+      submenu.style.display = 'none';
+    }
   });
-  </script>
-  
+});
+</script>
