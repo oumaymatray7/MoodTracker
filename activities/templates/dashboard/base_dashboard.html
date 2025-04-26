@@ -149,125 +149,35 @@
             
 
             <li class="nav-header">EXEMPLES</li>
-            <li class="nav-item">
+
+            {% if user.is_authenticated %}
+            <li class="nav-item has-treeview" id="auth-menu">
               <a href="#" class="nav-link">
                 <i class="nav-icon bi bi-box-arrow-in-right"></i>
                 <p>
                   Authentification
-                  <i class="nav-arrow bi bi-chevron-right"></i>
+                  <i class="right bi bi-chevron-down"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
+            
+              <ul class="nav nav-treeview ms-3" style="display: none;">  <!-- On cache par défaut -->
                 <li class="nav-item">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon bi bi-box-arrow-in-right"></i>
-                      <p>
-                        Connexion & Inscription
-                        <i class="nav-arrow bi bi-chevron-right"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="{% url 'login' %}" class="nav-link">
-                          <i class="nav-icon bi bi-circle"></i>
-                          <p>Se connecter</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="{% url 'register' %}" class="nav-link">
-                          <i class="nav-icon bi bi-circle"></i>
-                          <p>Créer un compte</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="nav-icon bi bi-circle"></i>
-                          <p>Écran de verrouillage</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-
-              <li class="nav-header">DOCUMENTATION</li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-download"></i>
-                  <p>Installation & Prérequis</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-grip-horizontal"></i>
-                  <p>Disposition & Mise en page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-star-half"></i>
-                  <p>Mode Sombre / Couleur</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-ui-checks-grid"></i>
-                  <p>
-                    Composants
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>En-tête principal</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Barre latérale</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-filetype-js"></i>
-                  <p>
-                    Comportement JavaScript
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-browser-edge"></i>
-                        <p>Navigateurs supportés</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-hand-thumbs-up-fill"></i>
-                        <p>Contribuer au projet</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-question-circle-fill"></i>
-                        <p>FAQ</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-patch-check-fill"></i>
-                        <p>Licence</p>
-                      </a>
-                    </li>
+                  <a href="{% url 'profile' %}" class="nav-link">
+                    <i class="bi bi-person-circle nav-icon"></i>
+                    <p>Mon compte</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'logout' %}" class="nav-link">
+                    <i class="bi bi-box-arrow-right nav-icon"></i>
+                    <p>Se déconnecter</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            {% endif %}
+            
+            
       
                     <li class="nav-header">AUTRES MENUS</li>
                     <li class="nav-item">
@@ -769,3 +679,19 @@
   <!-- /.card-footer -->
 </div>
 <!-- /.card -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const authMenu = document.querySelector('#auth-menu > a');
+    const submenu = document.querySelector('#auth-menu ul');
+  
+    authMenu.addEventListener('click', function(e) {
+      e.preventDefault(); // empêcher que la page saute en haut
+      if (submenu.style.display === 'none') {
+        submenu.style.display = 'block';
+      } else {
+        submenu.style.display = 'none';
+      }
+    });
+  });
+  </script>
+  

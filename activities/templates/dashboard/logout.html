@@ -1,0 +1,18 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card text-center shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title mb-3">👋 Déconnexion Réussie</h1>
+            <p class="card-text">Vous vous êtes déconnecté avec succès.</p>
+            <a href="{% url 'login' %}" class="btn btn-primary mt-3">
+                🔑 Se reconnecter
+            </a>
+            <a href="{% url 'accueil_public' %}" class="btn btn-secondary mt-3 ms-2">
+                🏠 Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

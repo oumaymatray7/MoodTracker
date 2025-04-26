@@ -7,7 +7,12 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.accueil_public, name='accueil_public'),  # <<< AJOUTE BIEN name='accueil_public'
+
+    path('', views.accueil_public, name='accueil_public'),  
+    # <<< AJOUTE BIEN name='accueil_public'
+    path('profile/', views.profile, name='profile'),
+path('logout/', views.custom_logout, name='logout'),
+
     path('send-feedback/', views.send_feedback, name='send_feedback'),
        path('contact/', views.contact_page, name='contact'),  
    path('ajouter-activite/', views.ajouter_activite, name='ajouter_activite'),

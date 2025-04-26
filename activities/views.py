@@ -1,9 +1,9 @@
 import json
 
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Count
@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from activities.models import ActiviteBienEtre
 
-from .forms import ActiviteForm
+from .forms import ActiviteForm, CustomPasswordChangeForm, UpdateAccountForm
 from .models import ActiviteBienEtre, Feedback
 
 
@@ -71,6 +71,12 @@ def edit_entry(request, id):
     activite = get_object_or_404(ActiviteBienEtre, id=id, utilisateur=request.user)
     # ...
 
+
+
+def custom_logout(request):
+    logout(request)
+    return redirect('login')  # ou retour accueil_public
+
 @login_required
 def edit_activite(request, id):
     activite = get_object_or_404(ActiviteBienEtre, id=id, utilisateur=request.user)
@@ -97,7 +103,26 @@ def delete_activite(request, id):
         return redirect('mes_activites')  # <<<< bien corrigé ici
     return render(request, 'dashboard/delete_activite.html', {'activite': activite})
 
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        account_form = UpdateAccountForm(request.POST, instance=request.user)
+        password_form = CustomPasswordChangeForm(user=request.user, data=request.POST)
 
+        if account_form.is_valid() and password_form.is_valid():
+            account_form.save()
+            password_form.save()
+            update_session_auth_hash(request, password_form.user)  # Important : éviter la déconnexion
+            messages.success(request, 'Votre compte a été mis à jour avec succès.')
+            return redirect('profile')
+    else:
+        account_form = UpdateAccountForm(instance=request.user)
+        password_form = CustomPasswordChangeForm(user=request.user)
+
+    return render(request, 'dashboard/profile.html', {
+        'account_form': account_form,
+        'password_form': password_form
+    })
 @login_required
 def create_activite(request):
     if request.method == 'POST':

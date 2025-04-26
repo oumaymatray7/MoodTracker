@@ -1,0 +1,29 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title mb-0">👤 Modifier Mon Compte</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <h5>Modifier le nom d'utilisateur</h5>
+                {{ account_form.as_p }}
+
+                <hr>
+
+                <h5>Changer le mot de passe</h5>
+                {{ password_form.as_p }}
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">💾 Enregistrer les modifications</button>
+                    <a href="{% url 'dashboard' %}" class="btn btn-secondary ms-2">⬅️ Retour</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
