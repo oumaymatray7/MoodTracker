@@ -1,0 +1,108 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h3 class="card-title mb-0">📊 Statistiques des Activités Bien-Être</h3>
+    </div>
+    <div class="card-body">
+    
+
+      <p class="text-muted">
+        Visualisez ici les graphiques, les résumés et l'évolution de vos activités de bien-être.
+      </p>
+
+      <div class="row mt-4">
+        <!-- Graphique par catégorie -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Activités par Catégorie</h5>
+              <canvas id="categorieChart" width="400" height="300"></canvas> 
+            </div>
+          </div>
+        </div>
+
+        <!-- Graphique évolution -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Évolution Mensuelle</h5>
+              <canvas id="evolutionChart" width="400" height="300"></canvas> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Script pour tracer les graphiques -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoriesData = JSON.parse('{{ categories_data|safe }}');
+    const monthlyData = JSON.parse('{{ monthly_data|safe }}');
+  
+    const categorieLabels = categoriesData.map(item => item.activity);
+    const categorieCounts = categoriesData.map(item => item.total);
+  
+    var ctxCategorie = document.getElementById('categorieChart').getContext('2d');
+    var categorieChart = new Chart(ctxCategorie, {
+      type: 'doughnut',
+      data: {
+        labels: categorieLabels,
+        datasets: [{
+          label: 'Nombre d\'activités',
+          data: categorieCounts,
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+      }
+    });
+  
+    const monthlyLabels = monthlyData.map(item => {
+      const date = new Date(item.month);
+      return date.toLocaleString('fr-FR', { month: 'short', year: 'numeric' });
+    });
+  
+    const monthlyCounts = monthlyData.map(item => item.total);
+  
+    var ctxEvolution = document.getElementById('evolutionChart').getContext('2d');
+    var evolutionChart = new Chart(ctxEvolution, {
+      type: 'line',
+      data: {
+        labels: monthlyLabels,
+        datasets: [{
+          label: 'Nombre d\'activités',
+          data: monthlyCounts,
+          fill: true,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+      }
+    });
+  
+  });
+  
+</script>
+
+{% endblock %}

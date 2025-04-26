@@ -1,8 +1,13 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -152,3 +157,23 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, 'public/register.html', {'form': form})
+
+@login_required
+def statistiques(request):
+    categories_data = ActiviteBienEtre.objects.filter(utilisateur=request.user) \
+        .values('activity') \
+        .annotate(total=Count('id')) \
+        .order_by('activity')
+
+    monthly_data = ActiviteBienEtre.objects.filter(utilisateur=request.user) \
+        .annotate(month=TruncMonth('date')) \
+        .values('month') \
+        .annotate(total=Count('id')) \
+        .order_by('month')
+
+    context = {
+    'categories_data': json.dumps(list(categories_data), cls=DjangoJSONEncoder),
+    'monthly_data': json.dumps(list(monthly_data), cls=DjangoJSONEncoder),
+}
+
+    return render(request, 'dashboard/statistique.html', context)
